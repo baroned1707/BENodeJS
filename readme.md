@@ -12,3 +12,10 @@ Step by step to run project
 - SocketIO
 - Detect request with end point have not exist
 - Save log error on csv
+- jsonwebtoken
+
+//Description
+
+- Create error with form => new Error(`${statusCode}:${"Message"}`)
+- Token field 'jwt'
+- Toekn format "JWT " + token

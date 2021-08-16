@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const index = require("./router/index");
 const cors = require("cors");
-const { writeLog } = require("./resrc/function");
+const { writeLog } = require("./base/until");
 
 var whiteList = [];
 
@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
   var error = err.message;
   var code = error.slice(0, error.indexOf(":"));
   var message = error.slice(error.indexOf(":") + 1, error.length);
-  writeLog(code,message,req);
+  writeLog(code, message, req);
   res.status(code).json(message);
 });
 

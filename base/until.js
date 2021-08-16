@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 const createUniqueID = () => {
   var time = new Date();
@@ -19,23 +19,26 @@ const fixTextSpaceAndLine = (string) => {
   return temp;
 };
 
-const writeLog=(code,message,req)=>{
-  let logPath = path.join(__dirname.replace('/resrc','/log'),'/log.csv');
+const writeLog = (code, message, req) => {
+  let logPath = path.join(__dirname.replace("/base", "/log"), "/log.csv");
   let date = new Date().toString();
   let ip = req.ip;
   let hostname = req.hostname;
   let row = `${date},${code},${message},${hostname},${ip}\n`;
-  fs.writeFile(logPath,row,(err)=>{
-    if (err) {
-      console.log('Error writing log to csv file', err);
-    } else {
-      console.log(`Write log done !`);
-    }
+  fs.readFile(logPath, "utf8", (err, data) => {
+    data += row;
+    fs.writeFile(logPath, data, (err) => {
+      if (err) {
+        console.log("Error writing log to csv file", err);
+      } else {
+        console.log(`Write log done !`);
+      }
+    });
   });
-}
+};
 
 module.exports = {
   createUniqueID,
   fixTextSpaceAndLine,
-  writeLog
+  writeLog,
 };
