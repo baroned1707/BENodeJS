@@ -37,8 +37,29 @@ const writeLog = (code, message, req) => {
   });
 };
 
+const validate = (object, fields) => {
+  var result = {};
+  Object.keys(object).map((cur, i) => {
+    var val = {
+      field: cur,
+      type: typeof cur,
+    };
+    if (
+      fields.some((item) => item.field == val.field && item.type == val.type) ==
+        true &&
+      result != false
+    ) {
+      result[`${cur}`] = object[`${cur}`];
+    } else {
+      result = false;
+    }
+  });
+  return result;
+};
+
 module.exports = {
   createUniqueID,
   fixTextSpaceAndLine,
   writeLog,
+  validate,
 };
